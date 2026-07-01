@@ -37,5 +37,4 @@ func readCLI() {
 
 func main() {
 	readCLI()
-	fmt.Println("Hello, World!")
 }
