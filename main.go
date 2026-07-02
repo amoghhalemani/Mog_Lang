@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"mog_lang/lexer"
+	"mog_lang/parser"
 	"os"
 	"path/filepath"
 )
@@ -35,11 +36,9 @@ func readCLI() string {
 func main() {
 	content := readCLI()
 	tokens := lexer.New(content)
-	for {
-		token := tokens.NextToken()
-		if token.Type == lexer.EOF {
-			break
-		}
-		fmt.Println(token)
-	}
+	parse := parser.New(tokens)
+	letStatement := parse.ParseLetStatement()
+	printStatement := parse.ParsePrintStatement()
+	fmt.Println(letStatement)
+	fmt.Println(printStatement)
 }
