@@ -26,7 +26,7 @@ func New(source string) *Lexer {
 }
 
 func (l *Lexer) NextToken() Token {
-	for l.pos < len(l.source) && l.source[l.pos] == ' ' {
+	for l.pos < len(l.source) && (l.source[l.pos] == ' ' || l.source[l.pos] == '\n' || l.source[l.pos] == '\t' || l.source[l.pos] == '\r') {
 		l.pos++
 	}
 	if l.pos >= len(l.source) {
