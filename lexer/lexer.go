@@ -6,13 +6,14 @@ type Token struct {
 }
 
 const (
-	LET        = "LET"
+	KEYWORD    = "KEYWORD"
 	IDENTIFIER = "IDENTIFIER"
 	NUMBER     = "NUMBER"
 	EQUAL      = "EQUAL"
 	LPAREN     = "LPAREN"
 	RPAREN     = "RPAREN"
 	EOF        = "EOF"
+	ILLEGAL    = "ILLEGAL"
 )
 
 type Lexer struct {
@@ -57,11 +58,11 @@ func (l *Lexer) NextToken() Token {
 			l.pos++
 		}
 		word := l.source[start:l.pos]
-		if word == "let" {
-			return Token{Type: LET, Value: "let"}
+		if word == "let" || word == "print" {
+			return Token{Type: KEYWORD, Value: word}
 		}
 		return Token{Type: IDENTIFIER, Value: word}
 	}
 	l.pos++
-	return Token{Type: EOF, Value: ""}
+	return Token{Type: ILLEGAL, Value: string(ch)}
 }
