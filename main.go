@@ -2,39 +2,44 @@ package main
 
 import (
 	"fmt"
+	"mog_lang/lexer"
 	"os"
 	"path/filepath"
 )
 
-func readCLI() {
+func readCLI() string {
 	fmt.Println("Reading CLI arguments...")
 	var args []string = os.Args
 	if len(args) != 3 {
-		fmt.Println("Error: Not enough arguments provided.")
-		return
+		return "Error: Not enough arguments provided."
 	}
 	if args[1] != "runs" {
-		fmt.Println("Error: Invalid command. Please use 'amogh runs <filename>'.mog")
-		return
+		return "Error: Invalid command. Please use 'amogh runs <filename>'.mog"
 	}
 
 	var filename string = args[2]
 
 	if filepath.Ext(filename) != ".mog" {
-		fmt.Println("Error: Invalid file type. Please provide a .mog file.")
-		return
+		return "Error: Invalid file type. Please provide a .mog file."
 	}
 
 	content, err := os.ReadFile(filename)
 	if err != nil {
-		fmt.Println("Error: Unable to read file.")
-		return
+		return "Error: Unable to read file."
 	}
 
-	fmt.Println(string(content))
+	return string(content)
 
 }
 
 func main() {
-	readCLI()
+	content := readCLI()
+	tokens := lexer.New(content)
+	for {
+		token := tokens.NextToken()
+		if token.Type == lexer.EOF {
+			break
+		}
+		fmt.Println(token)
+	}
 }
