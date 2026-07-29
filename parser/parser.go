@@ -35,3 +35,22 @@ func (p *Parser) ParsePrintStatement() *PrintStatement {
 	p.nextToken()
 	return &PrintStatement{Name: name}
 }
+
+func (p *Parser) ParseStatement() Statement {
+	if p.currentToken.Value == "let" {
+		return p.ParseLetStatement()
+	}
+	if p.currentToken.Value == "print" {
+		return p.ParsePrintStatement()
+	}
+	return nil
+}
+
+func (p *Parser) ParseProgram() []Statement {
+	var statements []Statement
+	for p.currentToken.Type != lexer.EOF {
+		present := p.ParseStatement()
+		statements = append(statements, present)
+	}
+	return statements
+}
