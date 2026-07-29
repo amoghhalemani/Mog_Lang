@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"mog_lang/interpreter"
 	"mog_lang/lexer"
 	"mog_lang/parser"
 	"os"
@@ -39,6 +40,7 @@ func main() {
 	parse := parser.New(tokens)
 	letStatement := parse.ParseLetStatement()
 	printStatement := parse.ParsePrintStatement()
-	fmt.Println(letStatement)
-	fmt.Println(printStatement)
+	interp := interpreter.New()
+	interp.ExecuteLet(letStatement)
+	interp.ExecutePrint(printStatement)
 }
