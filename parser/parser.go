@@ -1,7 +1,7 @@
 package parser
 
 import (
-	"mog_lang/lexer"
+	"github.com/amoghhalemani/Mog_Lang/lexer"
 )
 
 type Parser struct {

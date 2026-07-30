@@ -2,11 +2,12 @@ package main
 
 import (
 	"fmt"
-	"mog_lang/interpreter"
-	"mog_lang/lexer"
-	"mog_lang/parser"
 	"os"
 	"path/filepath"
+
+	"github.com/amoghhalemani/Mog_Lang/interpreter"
+	"github.com/amoghhalemani/Mog_Lang/lexer"
+	"github.com/amoghhalemani/Mog_Lang/parser"
 )
 
 func readCLI() string {

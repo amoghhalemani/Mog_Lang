@@ -2,7 +2,8 @@ package interpreter
 
 import (
 	"fmt"
-	"mog_lang/parser"
+
+	"github.com/amoghhalemani/Mog_Lang/parser"
 )
 
 type Interpreter struct {
