@@ -38,9 +38,15 @@ func main() {
 	content := readCLI()
 	tokens := lexer.New(content)
 	parse := parser.New(tokens)
-	letStatement := parse.ParseLetStatement()
-	printStatement := parse.ParsePrintStatement()
+	program := parse.ParseProgram()
 	interp := interpreter.New()
-	interp.ExecuteLet(letStatement)
-	interp.ExecutePrint(printStatement)
+	for _, stmt := range program {
+		//type switch to know which statement we're looking at before executing it.
+		switch v := stmt.(type) {
+		case *parser.LetStatement:
+			interp.ExecuteLet(v)
+		case *parser.PrintStatement:
+			interp.ExecutePrint(v)
+		}
+	}
 }
