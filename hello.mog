@@ -1,0 +1,4 @@
+let x = 42
+let y = 69
+print(x)
+print(y)
